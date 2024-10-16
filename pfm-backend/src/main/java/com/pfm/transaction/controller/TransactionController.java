@@ -22,7 +22,7 @@ import com.pfm.transaction.service.ITransactionService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping(path = "/api/transaction")
+@RequestMapping(path = "/transaction")
 @CrossOrigin(origins = "*")
 public class TransactionController {
 
