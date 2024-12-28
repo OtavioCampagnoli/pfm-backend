@@ -3,21 +3,19 @@ package com.pfm.core.service;
 import java.util.List;
 
 public interface IBaseService<T> {
+	T save(T model) throws Exception;
 
-	T save(T model);
+	T update(T model) throws Exception;
 
-	T update(T model);
+	List<T> paginatedSearch(T model, int page, int size, String sortBy, int sortDirection) throws Exception;
 
-	T paginatedSearch(T model);
+	List<T> search(T model) throws Exception;
 
-	List<T> search(T model);
+	T saveOrUpdate(T model) throws Exception;
 
-	T saveOrUpdate(T model);
+	Boolean deleteById(Integer id) throws Exception;
 
-	Boolean deleteById(Integer id);
+	T getById(Integer id) throws Exception;
 
-	T getById(Integer id);
-
-	List<T> findAll();
-
+	List<T> findAll() throws Exception;
 }

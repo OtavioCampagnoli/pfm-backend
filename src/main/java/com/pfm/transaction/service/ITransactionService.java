@@ -7,7 +7,5 @@ import com.pfm.transaction.dto.TransactionSearchDTO;
 import com.pfm.transaction.model.TransactionModel;
 
 public interface ITransactionService extends IBaseService<TransactionModel> {
-
 	List<TransactionModel> search(TransactionSearchDTO dto);
-	
 }

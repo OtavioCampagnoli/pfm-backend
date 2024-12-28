@@ -3,19 +3,18 @@ package com.pfm.core.dao;
 import java.util.List;
 
 public interface IBaseDAO<T> {
-
-	T save(T model);
 	
-	T paginatedSearch(T model);
-	
-	List<T> search(T model);
-	
-	T update(T model);
+	T save(T model) throws Exception;
 
-	Boolean deleteById(Integer id);
+	List<T> paginatedSearch(T model, int page, int size, String sortBy, int sortDirection) throws Exception;
 
-	T getById(Integer id);
+	List<T> search(T model) throws Exception;
 
-	List<T> findAll();
-	
+	T update(T model) throws Exception;
+
+	Boolean deleteById(Integer id) throws Exception;
+
+	T getById(Integer id) throws Exception;
+
+	List<T> findAll() throws Exception;
 }

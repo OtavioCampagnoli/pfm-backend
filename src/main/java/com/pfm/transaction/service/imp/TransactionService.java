@@ -17,17 +17,27 @@ public class TransactionService implements ITransactionService {
 	ITransactionDAO dao;
 
 	@Override
-	public TransactionModel save(TransactionModel model) {
+	public TransactionModel save(TransactionModel model) throws Exception {
 		return this.dao.save(model);
 	}
 
 	@Override
-	public TransactionModel update(TransactionModel model) {
+	public TransactionModel update(TransactionModel model) throws Exception {
 		return this.dao.update(model);
 	}
 
 	@Override
-	public TransactionModel saveOrUpdate(TransactionModel model) {
+	public List<TransactionModel> paginatedSearch(TransactionModel model, int page, int size, String sortBy, int sortDirection) throws Exception {
+		return List.of();
+	}
+
+	@Override
+	public List<TransactionModel> search(TransactionModel model) throws Exception {
+		return List.of();
+	}
+
+	@Override
+	public TransactionModel saveOrUpdate(TransactionModel model) throws Exception {
 
 		if (model == null) {
 			throw new IllegalArgumentException("Transaction model cannot be null");
@@ -41,7 +51,7 @@ public class TransactionService implements ITransactionService {
 	}
 
 	@Override
-	public Boolean deleteById(Integer id) {
+	public Boolean deleteById(Integer id) throws Exception {
 
 		TransactionModel objectExistent = this.dao.getById(id);
 
@@ -54,25 +64,13 @@ public class TransactionService implements ITransactionService {
 	}
 
 	@Override
-	public TransactionModel getById(Integer id) {
+	public TransactionModel getById(Integer id) throws Exception {
 		return this.dao.getById(id);
 	}
 
 	@Override
-	public List<TransactionModel> findAll() {
+	public List<TransactionModel> findAll() throws Exception {
 		return this.dao.findAll();
-	}
-
-	@Override
-	public TransactionModel paginatedSearch(TransactionModel model) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<TransactionModel> search(TransactionModel model) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
