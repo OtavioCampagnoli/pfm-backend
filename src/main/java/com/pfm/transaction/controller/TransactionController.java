@@ -2,6 +2,7 @@ package com.pfm.transaction.controller;
 
 import com.pfm.transaction.dto.TransactionSaveOrUpdateDTO;
 import com.pfm.transaction.dto.TransactionSearchDTO;
+import com.pfm.transaction.dto.TransactionResponseDTO;
 import com.pfm.transaction.model.TransactionModel;
 import com.pfm.transaction.service.ITransactionService;
 import jakarta.validation.Valid;
@@ -25,11 +26,17 @@ public class TransactionController {
 		this.service = service;
 	}
 
-	@GetMapping(path = "/listAll")
-	public ResponseEntity<List<TransactionModel>> listAll() throws Exception {
+	@GetMapping(path = "/findAll")
+	public ResponseEntity<List<TransactionModel>> findAll() throws Exception {
 		List<TransactionModel> transactions = service.findAll();
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
 	}
+	@GetMapping(path = "/listAll")
+	public ResponseEntity<List<TransactionResponseDTO>> listAll() throws Exception {
+		List<TransactionResponseDTO> transactions = service.listAll();
+		return new ResponseEntity<>(transactions, HttpStatus.OK);
+	}
+
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<TransactionModel> getById(@PathVariable Integer id) throws Exception {
