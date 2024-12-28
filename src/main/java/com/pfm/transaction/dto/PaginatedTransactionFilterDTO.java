@@ -1,16 +1,13 @@
 package com.pfm.transaction.dto;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Date;
-
-import com.pfm.transaction.enums.TransactionCategory;
-import com.pfm.transaction.enums.TransactionType;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -25,10 +22,6 @@ public class PaginatedTransactionFilterDTO {
 	private BigDecimal amount;
 	
 	private Date date;
-	
-	private TransactionType type;
-	
-	private TransactionCategory category;
 	
 	private LocalDateTime createdAt;
 	
