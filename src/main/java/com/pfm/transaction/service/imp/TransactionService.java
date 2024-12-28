@@ -1,20 +1,25 @@
 package com.pfm.transaction.service.imp;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.pfm.transaction.dao.ITransactionDAO;
+import com.pfm.transaction.dto.TransactionSaveOrUpdateDTO;
 import com.pfm.transaction.dto.TransactionSearchDTO;
 import com.pfm.transaction.model.TransactionModel;
 import com.pfm.transaction.service.ITransactionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TransactionService implements ITransactionService {
 
+	private final ITransactionDAO dao;
+
 	@Autowired
-	ITransactionDAO dao;
+	TransactionService(ITransactionDAO dao) {
+		this.dao = dao;
+	}
 
 	@Override
 	public TransactionModel save(TransactionModel model) throws Exception {
@@ -78,4 +83,19 @@ public class TransactionService implements ITransactionService {
 		return this.dao.search(dto);
 	}
 
+	@Override
+	public TransactionModel convertToModel(TransactionSaveOrUpdateDTO dto) {
+		TransactionModel model = new TransactionModel();
+
+		if(Objects.nonNull(dto.getId())) {
+			model.setId(dto.getId());
+		}
+		model.setDescription(dto.getDescription());
+		model.setAmount(dto.getAmount());
+		model.setTypeCla(dto.getTypeCla());
+		model.setCategoryCla(dto.getCategoryCla());
+		model.setDate(dto.getDate());
+
+		return model;
+	}
 }

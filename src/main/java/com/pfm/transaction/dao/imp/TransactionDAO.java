@@ -26,15 +26,15 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		query.append("description, ");
 		query.append("amount, ");
 		query.append("date, ");
-		query.append("type, ");
-		query.append("category, ");
+		query.append("type_cla, ");
+		query.append("category_cla, ");
 		query.append("created_at ");
 		query.append(") VALUES ( ");
 		query.append(":description, ");
 		query.append(":amount, ");
 		query.append(":date, ");
-		query.append(":type, ");
-		query.append(":category, ");
+		query.append(":typeCla, ");
+		query.append(":categoryCla, ");
 		query.append("now() ");
 		query.append(" ) ");
 
@@ -43,8 +43,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		params.addValue("description", model.getDescription());
 		params.addValue("amount", model.getAmount());
 		params.addValue("date", model.getDate());
-		params.addValue("type", model.getType().toString());
-		params.addValue("category", model.getCategory().toString());
+		params.addValue("typeCla", model.getTypeCla());
+		params.addValue("categoryCla", model.getCategoryCla());
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -74,8 +74,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		query.append("description = :description, ");
 		query.append("amount = :amount, ");
 		query.append("date = :date, ");
-		query.append("type = :type, ");
-		query.append("category = :category, ");
+		query.append("type_cla = :typeCla, ");
+		query.append("category_cla = :categoryCla, ");
 		query.append("updated_at = now() ");
 		query.append("WHERE id = :id ");
 
@@ -84,8 +84,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		params.addValue("description", model.getDescription());
 		params.addValue("amount", model.getAmount());
 		params.addValue("date", model.getDate());
-		params.addValue("type", model.getType().toString());
-		params.addValue("category", model.getCategory().toString());
+		params.addValue("typeCla", model.getTypeCla());
+		params.addValue("categoryCla", model.getCategoryCla());
 		params.addValue("id", model.getId());
 
 		this.namedParameterJdbcTemplate.update(query.toString(), params);
@@ -119,8 +119,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		query.append("tra.description, ");
 		query.append("tra.amount, ");
 		query.append("tra.date, ");
-		query.append("tra.type, ");
-		query.append("tra.category, ");
+		query.append("tra.type_cla, ");
+		query.append("tra.category_cla, ");
 		query.append("tra.created_at, ");
 		query.append("tra.updated_at ");
 		query.append("FROM ").append(this.schemaName).append("transaction AS tra ");
@@ -148,8 +148,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		query.append(" tra.description, ");
 		query.append(" tra.amount, ");
 		query.append(" tra.date, ");
-		query.append(" tra.type, ");
-		query.append(" tra.category, ");
+		query.append(" tra.type_cla, ");
+		query.append(" tra.category_cla, ");
 		query.append(" tra.created_at, ");
 		query.append(" tra.updated_at ");
 		query.append(" FROM ").append(this.schemaName).append("transaction AS tra ");
@@ -176,8 +176,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		query.append("tra.description, ");
 		query.append("tra.amount, ");
 		query.append("tra.date, ");
-		query.append("tra.type, ");
-		query.append("tra.category, ");
+		query.append("tra.type_cla, ");
+		query.append("tra.category_cla, ");
 		query.append("tra.created_at, ");
 		query.append("tra.updated_at ");
 		query.append(" FROM ").append(this.schemaName).append("transaction AS tra ");
@@ -204,14 +204,14 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 			params.addValue("date", dto.getDate());
 		}
 
-		if (dto.getType() != null) {
-			query.append("AND tra.type = :type ");
-			params.addValue("type", dto.getType().toString());
+		if (dto.getTypeCla() != null) {
+			query.append("AND tra.type_cla = :typeCla ");
+			params.addValue("typeCla", dto.getTypeCla());
 		}
 
-		if (dto.getCategory() != null) {
-			query.append("AND tra.category = :category ");
-			params.addValue("category", dto.getCategory().toString());
+		if (dto.getCategoryCla() != null) {
+			query.append("AND tra.category_cla = :categoryCla ");
+			params.addValue("categoryCla", dto.getCategoryCla());
 		}
 
 		if (dto.getCreatedAt() != null && dto.getCreatedAtEnd() != null) {

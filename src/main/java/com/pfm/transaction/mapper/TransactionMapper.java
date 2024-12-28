@@ -1,16 +1,13 @@
 package com.pfm.transaction.mapper;
 
+import com.pfm.transaction.model.TransactionModel;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
-
-import com.pfm.transaction.enums.TransactionCategory;
-import com.pfm.transaction.enums.TransactionType;
-import com.pfm.transaction.model.TransactionModel;
 
 public class TransactionMapper implements ResultSetExtractor<List<TransactionModel>> {
 
@@ -27,13 +24,8 @@ public class TransactionMapper implements ResultSetExtractor<List<TransactionMod
 			transaction.setDescription(rs.getString("description"));
 			transaction.setAmount(rs.getBigDecimal("amount"));
 			transaction.setDate(rs.getDate("date"));
-
-			String type = rs.getString("type");
-			transaction.setType(TransactionType.valueOf(type));
-
-			String category = rs.getString("category");
-			transaction.setCategory(TransactionCategory.valueOf(category));
-
+			transaction.setTypeCla(rs.getInt("type_cla"));
+			transaction.setCategoryCla(rs.getInt("category_cla"));
 			transaction.setDate(rs.getDate("date"));
 			transaction.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
 			transaction.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
