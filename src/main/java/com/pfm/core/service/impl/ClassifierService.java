@@ -1,14 +1,12 @@
 package com.pfm.core.service.impl;
 
-import java.util.List;
-
 import com.pfm.core.dao.IClassifierDAO;
-import com.pfm.core.dto.ClassifierSaveRequestDTO;
-import com.pfm.core.dto.ClassifierSearchRequestDTO;
 import com.pfm.core.model.ClassifierModel;
 import com.pfm.core.service.IClassifierService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -61,37 +59,6 @@ public class ClassifierService implements IClassifierService {
 	@Override
 	public List<ClassifierModel> findAllByType(ClassifierModel model) throws Exception {
 		return dao.findAllByType(model);
-	}
-
-	@Override
-	public ClassifierModel convertClassifierSaveRequestDTOToClassifierModel(ClassifierSaveRequestDTO dto) {
-		
-		ClassifierModel model = new ClassifierModel();
-		
-		if (dto != null) {
-			if (dto.getId() != null && dto.getId() > 0) {
-				model.setId(dto.getId());
-			}
-			model.setValue(dto.getValue());
-			model.setType(dto.getType());
-			model.setLabel(dto.getLabel());
-			model.setDescription(dto.getDescription());
-		}
-		return model;
-
-	}
-
-	@Override
-	public ClassifierModel convertClassifierSearchRequestDTOToClassifierModel(ClassifierSearchRequestDTO dto) {
-		ClassifierModel model = new ClassifierModel();
-
-		if (dto != null) {
-			model.setValue(dto.getValue());
-			model.setType(dto.getType());
-			model.setLabel(dto.getLabel());
-			model.setDescription(dto.getDescription());
-		}
-		return model;
 	}
 
 }

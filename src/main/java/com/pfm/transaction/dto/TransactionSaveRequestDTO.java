@@ -1,6 +1,7 @@
 package com.pfm.transaction.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.pfm.core.model.ClassifierModel;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -13,9 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class TransactionSaveOrUpdateDTO {
-
-	private Integer id;
+public class TransactionSaveRequestDTO {
 
 	@NotBlank
 	@Size(min = 2, max = 255)
@@ -30,10 +29,10 @@ public class TransactionSaveOrUpdateDTO {
 	private Date date;
 
 	@NotNull
-	private Integer typeCla;
+	private ClassifierModel typeCla;
 
 	@NotNull
-	private Integer categoryCla;
+	private ClassifierModel categoryCla;
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime createdAt;

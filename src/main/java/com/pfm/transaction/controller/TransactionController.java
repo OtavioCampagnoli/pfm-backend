@@ -1,8 +1,8 @@
 package com.pfm.transaction.controller;
 
-import com.pfm.transaction.dto.TransactionSaveOrUpdateDTO;
+import com.pfm.transaction.dto.TransactionSaveRequestDTO;
 import com.pfm.transaction.dto.TransactionSearchDTO;
-import com.pfm.transaction.dto.TransactionResponseDTO;
+import com.pfm.transaction.dto.TransactionUpdateRequestDTO;
 import com.pfm.transaction.model.TransactionModel;
 import com.pfm.transaction.service.ITransactionService;
 import jakarta.validation.Valid;
@@ -31,12 +31,6 @@ public class TransactionController {
 		List<TransactionModel> transactions = service.findAll();
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
 	}
-	@GetMapping(path = "/listAll")
-	public ResponseEntity<List<TransactionResponseDTO>> listAll() throws Exception {
-		List<TransactionResponseDTO> transactions = service.listAll();
-		return new ResponseEntity<>(transactions, HttpStatus.OK);
-	}
-
 
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<TransactionModel> getById(@PathVariable Integer id) throws Exception {
@@ -52,10 +46,17 @@ public class TransactionController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<TransactionModel> save(@RequestBody @Valid TransactionSaveOrUpdateDTO dto) throws Exception {
-		TransactionModel model = this.service.convertToModel(dto);
+	public ResponseEntity<TransactionModel> save(@RequestBody @Valid TransactionSaveRequestDTO dto) throws Exception {
+		TransactionModel model = new TransactionModel(dto);
+		TransactionModel response = this.service.save(model);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 
-		TransactionModel response = this.service.saveOrUpdate(model);
+	@PutMapping
+	@Transactional
+	public ResponseEntity<TransactionModel> update(@RequestBody @Valid TransactionUpdateRequestDTO dto) throws Exception {
+		TransactionModel model = new TransactionModel(dto);
+		TransactionModel response = this.service.update(model);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 

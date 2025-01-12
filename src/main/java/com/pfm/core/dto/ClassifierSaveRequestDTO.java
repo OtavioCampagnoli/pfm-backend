@@ -11,8 +11,6 @@ import org.hibernate.validator.constraints.Length;
 @Builder(toBuilder = true)
 public class ClassifierSaveRequestDTO {
 
-	private Integer id;
-
 	@NotBlank
 	@Length(max = 50)
 	private String value;

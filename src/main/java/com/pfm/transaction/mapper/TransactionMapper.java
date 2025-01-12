@@ -1,5 +1,6 @@
 package com.pfm.transaction.mapper;
 
+import com.pfm.core.model.ClassifierModel;
 import com.pfm.transaction.model.TransactionModel;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -18,19 +19,23 @@ public class TransactionMapper implements ResultSetExtractor<List<TransactionMod
 
 		while (rs.next()) {
 
-			TransactionModel transaction = new TransactionModel();
+			TransactionModel model = new TransactionModel();
 
-			transaction.setId(rs.getInt("id"));
-			transaction.setDescription(rs.getString("description"));
-			transaction.setAmount(rs.getBigDecimal("amount"));
-			transaction.setDate(rs.getDate("date"));
-			transaction.setTypeCla(rs.getInt("type_cla"));
-			transaction.setCategoryCla(rs.getInt("category_cla"));
-			transaction.setDate(rs.getDate("date"));
-			transaction.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
-			transaction.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+			ClassifierModel classifierModel = new ClassifierModel();
 
-			list.add(transaction);
+			model.setId(rs.getInt("id"));
+			model.setDescription(rs.getString("description"));
+			model.setAmount(rs.getBigDecimal("amount"));
+			model.setDate(rs.getDate("date"));
+			classifierModel.setId(rs.getInt("type_cla"));
+			model.setTypeCla(classifierModel);
+			classifierModel.setId(rs.getInt("category_cla"));
+			model.setCategoryCla(classifierModel);
+			model.setDate(rs.getDate("date"));
+			model.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+			model.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+
+			list.add(model);
 		}
 		return list;
 	}

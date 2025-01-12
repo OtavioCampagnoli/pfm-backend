@@ -2,6 +2,7 @@ package com.pfm.core.controller;
 
 import com.pfm.core.dto.ClassifierSaveRequestDTO;
 import com.pfm.core.dto.ClassifierSearchRequestDTO;
+import com.pfm.core.dto.ClassifierUpdateRequestDTO;
 import com.pfm.core.model.ClassifierModel;
 import com.pfm.core.service.IClassifierService;
 import jakarta.validation.Valid;
@@ -29,7 +30,7 @@ public class ClassifierController {
 
 	@PostMapping(path = "/listAllByType")
 	public ResponseEntity<List<ClassifierModel>> listAllByType(@RequestBody @Valid ClassifierSearchRequestDTO dto) throws Exception {
-		var model = service.convertClassifierSearchRequestDTOToClassifierModel(dto);
+		ClassifierModel model = new ClassifierModel(dto);
 		List<ClassifierModel> classifiers = service.findAllByType(model);
 		return new ResponseEntity<>(classifiers, HttpStatus.OK);
 	}
@@ -42,7 +43,7 @@ public class ClassifierController {
 
 	@PostMapping("/search")
 	public ResponseEntity<List<ClassifierModel>> search(@RequestBody @Valid ClassifierSearchRequestDTO dto) throws Exception {
-		var model = service.convertClassifierSearchRequestDTOToClassifierModel(dto);
+		ClassifierModel model = new ClassifierModel(dto);
 		List<ClassifierModel> classifiers = service.search(model);
 		return new ResponseEntity<>(classifiers, HttpStatus.OK);
 	}
@@ -54,14 +55,22 @@ public class ClassifierController {
 			@RequestParam(defaultValue = "id") String sortBy, 
 			@RequestParam(defaultValue = "1") int sortDirection)
 			throws Exception {
-		var model = service.convertClassifierSearchRequestDTOToClassifierModel(dto);
+		var model = new ClassifierModel(dto);
 		return ResponseEntity.ok(service.paginatedSearch(model, page, size, sortBy, sortDirection));
 	}
 
 	@PostMapping
 	@Transactional
 	public ResponseEntity<ClassifierModel> save(@RequestBody @Valid ClassifierSaveRequestDTO dto) throws Exception {
-		ClassifierModel model = service.convertClassifierSaveRequestDTOToClassifierModel(dto);
+		ClassifierModel model = new ClassifierModel(dto);
+		ClassifierModel response = this.service.saveOrUpdate(model);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@PutMapping
+	@Transactional
+	public ResponseEntity<ClassifierModel> update(@RequestBody @Valid ClassifierUpdateRequestDTO dto) throws Exception {
+		ClassifierModel model = new ClassifierModel(dto);
 		ClassifierModel response = this.service.saveOrUpdate(model);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

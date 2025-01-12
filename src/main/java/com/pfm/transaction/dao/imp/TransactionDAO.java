@@ -43,8 +43,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		params.addValue("description", model.getDescription());
 		params.addValue("amount", model.getAmount());
 		params.addValue("date", model.getDate());
-		params.addValue("typeCla", model.getTypeCla());
-		params.addValue("categoryCla", model.getCategoryCla());
+		params.addValue("typeCla", model.getTypeCla().getId());
+		params.addValue("categoryCla", model.getCategoryCla().getId());
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -84,8 +84,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		params.addValue("description", model.getDescription());
 		params.addValue("amount", model.getAmount());
 		params.addValue("date", model.getDate());
-		params.addValue("typeCla", model.getTypeCla());
-		params.addValue("categoryCla", model.getCategoryCla());
+		params.addValue("typeCla", model.getTypeCla().getId());
+		params.addValue("categoryCla", model.getCategoryCla().getId());
 		params.addValue("id", model.getId());
 
 		this.namedParameterJdbcTemplate.update(query.toString(), params);
