@@ -26,7 +26,7 @@ public class TransactionController {
 		this.service = service;
 	}
 
-	@GetMapping(path = "/findAll")
+	@GetMapping(path = "/listAll")
 	public ResponseEntity<List<TransactionModel>> findAll() throws Exception {
 		List<TransactionModel> transactions = service.findAll();
 		return new ResponseEntity<>(transactions, HttpStatus.OK);
