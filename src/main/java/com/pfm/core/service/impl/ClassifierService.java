@@ -57,8 +57,8 @@ public class ClassifierService implements IClassifierService {
 	}
 
 	@Override
-	public List<ClassifierModel> findAllByType(ClassifierModel model) throws Exception {
-		return dao.findAllByType(model);
+	public List<ClassifierModel> findAllByType(String type) throws Exception {
+		return dao.findAllByType(type);
 	}
 
 }

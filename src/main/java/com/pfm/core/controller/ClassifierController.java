@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/classifier")
+@RequestMapping(path = "/classifier")
 @CrossOrigin(origins = "*")
 public class ClassifierController {
 
@@ -28,10 +28,11 @@ public class ClassifierController {
 		return new ResponseEntity<>(classifiers, HttpStatus.OK);
 	}
 
-	@PostMapping(path = "/listAllByType")
-	public ResponseEntity<List<ClassifierModel>> listAllByType(@RequestBody @Valid ClassifierSearchRequestDTO dto) throws Exception {
-		ClassifierModel model = new ClassifierModel(dto);
-		List<ClassifierModel> classifiers = service.findAllByType(model);
+	@GetMapping(path = "/listAllByType")
+	public ResponseEntity<List<ClassifierModel>> listAllByType(
+			@RequestParam("type") String type
+	) throws Exception {
+		List<ClassifierModel> classifiers = service.findAllByType(type);
 		return new ResponseEntity<>(classifiers, HttpStatus.OK);
 	}
 

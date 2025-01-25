@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.sql.SQLException;
 import java.util.List;
 
 @RestControllerAdvice
@@ -34,6 +35,12 @@ public class HandlerErrors {
 	@ExceptionHandler(RuntimeException.class)
 	public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getLocalizedMessage());
+	}
+
+	@ExceptionHandler(SQLException.class)
+	public ResponseEntity<String> handleSQLException(SQLException ex) {
+		return new ResponseEntity<>("Erro ao acessar ao banco de dados:" + ex.getStackTrace(),
+				HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

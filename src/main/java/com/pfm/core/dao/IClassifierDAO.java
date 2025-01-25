@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface IClassifierDAO extends IBaseDAO<ClassifierModel> {
 	
-	List<ClassifierModel> findAllByType(ClassifierModel model) throws Exception;
+	List<ClassifierModel> findAllByType(String type) throws Exception;
 }
