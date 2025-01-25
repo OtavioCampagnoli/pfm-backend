@@ -1,5 +1,6 @@
 package com.pfm.transaction.service.imp;
 
+import com.pfm.core.model.ClassifierModel;
 import com.pfm.core.service.IClassifierService;
 import com.pfm.transaction.dao.ITransactionDAO;
 import com.pfm.transaction.dto.TransactionResponseDTO;
@@ -80,7 +81,20 @@ public class TransactionService implements ITransactionService {
 
 	@Override
 	public List<TransactionModel> findAll() throws Exception {
-		return this.dao.findAll();
+		List<TransactionModel> transactions = this.dao.findAll();
+
+		transactions.stream()
+				.forEach(tra -> {
+                    try {
+                      ClassifierModel categoryCla = this.classifierService.getById(tra.getCategoryCla().getId());
+					  tra.setCategoryCla(categoryCla);
+					  ClassifierModel typeCla = this.classifierService.getById(tra.getTypeCla().getId());
+					  tra.setTypeCla(typeCla);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+		return transactions;
 	}
 
 	@Override

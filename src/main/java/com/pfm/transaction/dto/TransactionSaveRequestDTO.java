@@ -25,7 +25,6 @@ public class TransactionSaveRequestDTO {
 	private BigDecimal amount;
 
 	@NotNull
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date;
 
 	@NotNull
@@ -33,11 +32,4 @@ public class TransactionSaveRequestDTO {
 
 	@NotNull
 	private ClassifierModel categoryCla;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime createdAt;
-
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime updatedAt;
-
 }

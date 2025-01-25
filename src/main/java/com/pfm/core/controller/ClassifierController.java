@@ -19,8 +19,12 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class ClassifierController {
 
+	private final IClassifierService service;
+
 	@Autowired
-	private IClassifierService service;
+	ClassifierController(IClassifierService service) {
+		this.service = service;
+	}
 
 	@GetMapping(path = "/listAll")
 	public ResponseEntity<List<ClassifierModel>> listAll() throws Exception {

@@ -12,8 +12,12 @@ import java.util.List;
 @Service
 public class ClassifierService implements IClassifierService {
 
+	private final IClassifierDAO dao;
+
 	@Autowired
-	private IClassifierDAO dao;
+	ClassifierService(IClassifierDAO dao) {
+		this.dao = dao;
+	}
 
 	@Override
 	public ClassifierModel save(ClassifierModel model) throws Exception {

@@ -21,19 +21,24 @@ public class TransactionMapper implements ResultSetExtractor<List<TransactionMod
 
 			TransactionModel model = new TransactionModel();
 
-			ClassifierModel classifierModel = new ClassifierModel();
+			ClassifierModel typeCla = new ClassifierModel();
+
+			ClassifierModel categoryCla = new ClassifierModel();
 
 			model.setId(rs.getInt("id"));
 			model.setDescription(rs.getString("description"));
 			model.setAmount(rs.getBigDecimal("amount"));
 			model.setDate(rs.getDate("date"));
-			classifierModel.setId(rs.getInt("type_cla"));
-			model.setTypeCla(classifierModel);
-			classifierModel.setId(rs.getInt("category_cla"));
-			model.setCategoryCla(classifierModel);
+
+			typeCla.setId(rs.getInt("type_cla"));
+			model.setTypeCla(typeCla);
+
+			categoryCla.setId(rs.getInt("category_cla"));
+			model.setCategoryCla(categoryCla);
+
 			model.setDate(rs.getDate("date"));
-			model.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
-			model.setUpdatedAt(rs.getTimestamp("updated_at").toLocalDateTime());
+			model.setCreatedAt(rs.getTimestamp("created_at"));
+			model.setUpdatedAt(rs.getTimestamp("updated_at"));
 
 			list.add(model);
 		}
