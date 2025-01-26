@@ -99,7 +99,21 @@ public class TransactionService implements ITransactionService {
 
 	@Override
 	public List<TransactionModel> search(TransactionSearchDTO dto) {
-		return this.dao.search(dto);
+		List<TransactionModel> transactions = this.dao.search(dto);
+
+		transactions.stream()
+				.forEach(tra -> {
+					try {
+						ClassifierModel categoryCla = this.classifierService.getById(tra.getCategoryCla().getId());
+						tra.setCategoryCla(categoryCla);
+						ClassifierModel typeCla = this.classifierService.getById(tra.getTypeCla().getId());
+						tra.setTypeCla(typeCla);
+					} catch (Exception e) {
+						throw new RuntimeException(e);
+					}
+				});
+
+		return transactions;
 	}
 
 }
