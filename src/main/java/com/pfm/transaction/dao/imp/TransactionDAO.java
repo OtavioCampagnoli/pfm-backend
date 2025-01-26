@@ -43,8 +43,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		params.addValue("description", model.getDescription());
 		params.addValue("amount", model.getAmount());
 		params.addValue("date", model.getDate());
-		params.addValue("typeCla", model.getTypeCla());
-		params.addValue("categoryCla", model.getCategoryCla());
+		params.addValue("typeCla", model.getTypeCla().getId());
+		params.addValue("categoryCla", model.getCategoryCla().getId());
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -84,8 +84,8 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		params.addValue("description", model.getDescription());
 		params.addValue("amount", model.getAmount());
 		params.addValue("date", model.getDate());
-		params.addValue("typeCla", model.getTypeCla());
-		params.addValue("categoryCla", model.getCategoryCla());
+		params.addValue("typeCla", model.getTypeCla().getId());
+		params.addValue("categoryCla", model.getCategoryCla().getId());
 		params.addValue("id", model.getId());
 
 		this.namedParameterJdbcTemplate.update(query.toString(), params);
@@ -181,7 +181,7 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 		query.append("tra.created_at, ");
 		query.append("tra.updated_at ");
 		query.append(" FROM ").append(this.schemaName).append("transaction AS tra ");
-		query.append("WHERE tra.id > 0 ");
+		query.append("WHERE 1 = 1 ");
 
 		MapSqlParameterSource params = new MapSqlParameterSource();
 
@@ -206,12 +206,12 @@ public class TransactionDAO extends BaseDAO implements ITransactionDAO {
 
 		if (dto.getTypeCla() != null) {
 			query.append("AND tra.type_cla = :typeCla ");
-			params.addValue("typeCla", dto.getTypeCla());
+			params.addValue("typeCla", dto.getTypeCla().getId());
 		}
 
 		if (dto.getCategoryCla() != null) {
 			query.append("AND tra.category_cla = :categoryCla ");
-			params.addValue("categoryCla", dto.getCategoryCla());
+			params.addValue("categoryCla", dto.getCategoryCla().getId());
 		}
 
 		if (dto.getCreatedAt() != null && dto.getCreatedAtEnd() != null) {

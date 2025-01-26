@@ -326,7 +326,7 @@ public class ClassifierDAO extends BaseDAO implements IClassifierDAO {
 	}
 
 	@Override
-	public List<ClassifierModel> findAllByType(ClassifierModel model) throws Exception {
+	public List<ClassifierModel> findAllByType(String type) throws Exception {
 
 		List<ClassifierModel> listReturn = new LinkedList<ClassifierModel>();
 
@@ -345,7 +345,7 @@ public class ClassifierDAO extends BaseDAO implements IClassifierDAO {
 
 			MapSqlParameterSource params = new MapSqlParameterSource();
 
-			params.addValue("type", model.getType());
+			params.addValue("type", type);
 
 			List<ClassifierModel> list = this.namedParameterJdbcTemplate.query(query.toString(), params,
 					new ClassifierMapper());

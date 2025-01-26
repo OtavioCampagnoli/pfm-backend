@@ -1,6 +1,7 @@
 package com.pfm.transaction.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.pfm.core.model.ClassifierModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,26 +21,20 @@ public class TransactionSearchDTO {
 
 	private BigDecimal amount;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date date;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
 	private Date dateEnd;
 
-	private Integer typeCla;
+	private ClassifierModel typeCla;
 
-	private Integer categoryCla;
+	private ClassifierModel categoryCla;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime createdAt;
+	private Date createdAt;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime createdAtEnd;
+	private Date createdAtEnd;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime updatedAt;
+	private Date updatedAt;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm")
-	private LocalDateTime updatedAtEnd;
+	private Date updatedAtEnd;
 
 }
